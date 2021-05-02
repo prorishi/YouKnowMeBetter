@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="/" type="image/x-icon" />
+        <title>Create Your Quiz - You Know Me Better?</title>
+        <script>
+            const questions = JSON.parse(`{{}}`);
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="title">You Know Me Better?</div>
+        </div>
+        <div id="body">
+            <div id="sub-heading">Create your own quiz</div>
+            <form>
+                <label for="number">Number of questions:</label>
+                <select id="number">
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option selected>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                </select>
+            </form>
+            <div id="quesarea">
+                <button id="skip">skip this question</button>
+                <div id="queshash">Q1</div>
+                <div id="ques"></div>
+                <div id="ops"></div>
+            </div>
+        </div>
+
+        <script>
+            const self = {
+                name: localStorage.getItem("name"),
+                ques: [],
+            };
+
+            let f = document.getElementById("number");
+            let ques = document.getElementById("ques");
+            let ops = document.getElementById("ops");
+            let qh = document.getElementById("queshash");
+            let skip = document.getElementById("skip");
+            let qhash = 0;
+            document.body.onload = () => {
+                dispques();
+            };
+            let repques = [];
+
+            function pickques() {
+                let ind = Math.floor((Math.random() * 100) % Object.keys(questions).length) + 1;
+                if (repques.includes(ind)) return;
+                else {
+                    repques.push(ind);
+                    return questions[ind];
+                }
+            }
+
+            function dispques() {
+                let currques = pickques();
+                if (currques) {
+                    ques.innerText = currques.q;
+                    let op = [];
+                    currques.op.forEach((o) => {
+                        op.push("<button onclick='btcl(this)'>" + o[0] + "</button> ");
+                    });
+                    qhash += 1;
+                    if (qhash >4 && qhash<=parseInt(f.value))
+                    f.removeChild(f.children[0])
+                    
+                    qh.innerText = "Q" + qhash;
+                    ops.innerHTML = op.join(" ");
+                } else {
+                    dispques();
+                }
+            }
+
+            function btcl(el) {
+                console.log(el.innerText);
+                if (qhash >= parseInt(f.value)) {
+                    alert("ques completed");
+                }
+                dispques();
+            }
+
+            skip.onclick = () => {
+                qhash -= 1;
+                dispques();
+            };
+        </script>
+    </body>
+</html>
