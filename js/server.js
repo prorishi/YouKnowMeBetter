@@ -2,7 +2,8 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-const users = {};
+let users = {};
+const questions = require('./questions')
 
 function getContents(file) {
     return fs.readFileSync(file, {
@@ -12,37 +13,68 @@ function getContents(file) {
 }
 
 function upusers() {
-    users = JSON.parse(getContents("../users.json"));
+    users = JSON.parse(getContents(path.join(path.dirname(__dirname), "users.json")));
 }
 function updb() {
-    fs.writeFileSync("../users.json", JSON.stringify(users, null, 4));
+    fs.writeFileSync(path.join(path.dirname(__dirname), "users.json"), JSON.stringify(users));
 }
 
 const server = express();
-server.use(
-    "/",
-    express.urlencoded({
-        extended: false,
-    })
-);
 
-server.use("/helo", express.json());
+server.use("/s", express.json());
 server.use(express.static("images"));
 
 server.get("/", (request, response) => {
     console.log("get /");
-    response.sendFile(path.join(path.dirname(__dirname), "html", "index.html"));
+    response.end(getContents(path.join(path.dirname(__dirname), "html", "index.html")).replace("{{}}", JSON.stringify(questions)));
 });
 
-server.post("/", (request, response) => {
-    console.log("post /");
-    console.log(request.body.name);
-    response.end(getContents(path.join(path.dirname(__dirname), "html", "create.html")).replace("{{}}", JSON.stringify(require('./questions'))));
-});
 
-server.post("/helo", (request, response) => {
+server.post("/s", (request, response) => {
+    let name = request.body.name
+    let uname = name.replace(/[^a-zA-Z0-9_-]/ig, "")
+    upusers();
+    if (Object.keys(users).includes(uname)) {
+        let d= users[uname].counter;
+        users[uname].counter++;
+        users[uname+d] = {
+            name: name,
+            ques: request.body.ques,
+            counter: 0
+        };
+        response.end(request.protocol+'://'+ request.hostname+'/'+uname+d);
+    } else {
+        users[uname] = {
+            name: name,
+            ques: request.body.ques,
+            counter: 0
+        };
+        response.end(request.protocol+'://'+ request.hostname+'/'+uname);
+    }
+    updb();
     console.log(request.body);
-    response.end("ok");
+    
 });
+
+server.get('/:person', (request,response)=>{
+    let person=request.params.person;
+    upusers()
+    let data={}
+    if (Object.keys(users).includes(person)) {
+        data.name = users[person].name
+        data.ques = []
+        users[person].ques.forEach(q=>{
+            data.ques.push({
+                q:questions[q[0]].qo.replace(/{}/g, data.name),
+                ops:questions[q[0]].op,
+                co: q[1]
+            })
+        })
+        response.end(getContents(path.join(path.dirname(__dirname), "html", "quiz.html")).replace("{{}}", JSON.stringify(data)));
+    }
+    else {
+        response.end('not found')
+    }
+})
 
 server.listen(process.env.PORT || 80);

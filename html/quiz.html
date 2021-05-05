@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="/" type="image/x-icon" />
+        <title>Quiz - You Know Me Better?</title>
+        <script>
+            const data = JSON.parse(`{{}}`);
+            console.log(data);
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="title">You Know Me Better?</div>
+        </div>
+        <div id="body">
+            <div id="page1">
+                So, You think you know about <span id="name"></span> better than anyone else?
+                <br>
+                <button id="attempt">Attempt the quiz</button>
+            </div>
+
+            <div id="page2">
+                <div id="quesarea">
+                    <div id="qhash"></div>
+                    <div id="ques"></div>
+                    <div id="ops"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.body.onload = ()=>{
+                document.getElementById('name').innerText = data.name
+            }
+        </script>
+    </body>
+</html>
