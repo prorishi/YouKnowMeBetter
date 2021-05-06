@@ -205,13 +205,3 @@ module.exports = {
         op: [["Rock"], ["Party"], ["Classical"], ["Rap"], ["Bollywood"], ["English songs"]],
     },
 };
-
-// {
-//     id: 11,
-//     q: '',
-//     qo: '',
-//     op: [
-//         ["", ],
-//         ["", ],
-//     ]
-// }
