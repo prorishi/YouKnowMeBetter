@@ -21,8 +21,7 @@ function updb() {
 
 const server = express();
 
-
-server.use('/images', express.static(path.join(path.dirname(__dirname), "images")))
+server.use("/images", express.static(path.join(path.dirname(__dirname), "images")));
 server.use(express.json());
 // server.use("/images" ,express.static("../images"));
 
@@ -40,7 +39,7 @@ server.post("/s", (request, response) => {
         users[uname].counter++;
         users[uname + d] = {
             name: name,
-            uname: uname+d,
+            uname: uname + d,
             ques: request.body.ques,
             friends: [],
             counter: 0,
@@ -66,8 +65,8 @@ server.get("/:person", (request, response) => {
     let data = {};
     if (Object.keys(users).includes(person)) {
         data.name = users[person].name;
-        data.f = users[person].friends
-        data.uname = users[person].uname
+        data.f = users[person].friends;
+        data.uname = users[person].uname;
         data.ques = [];
         users[person].ques.forEach((q) => {
             data.ques.push({
@@ -82,15 +81,15 @@ server.get("/:person", (request, response) => {
     }
 });
 
-server.post('/sub', (request, response)=>{
-    upusers()
-    let n=request.body
-    let whose=n.whose
+server.post("/sub", (request, response) => {
+    upusers();
+    let n = request.body;
+    let whose = n.whose;
     console.log(n.score, users[whose].friends);
     // console.log(n.whose, users[n].friends);
-    users[whose].friends.push([n.name, n.score])
-    updb()
-    response.end('ok')
-})
+    users[whose].friends.push([n.name, n.score]);
+    updb();
+    response.end("ok");
+});
 
 server.listen(process.env.PORT || 80);

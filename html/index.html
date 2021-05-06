@@ -102,11 +102,20 @@
                     let op = [];
                     currques.op.forEach((o) => {
                         lc = o;
-                        if(o[1]) {
-                        op.push('<span><img width="100" height="100" src="http://localhost/images/'+o[1]+'"><br><button onclick="btcl(this, currques, currques.op.indexOf(lc))">' + o[0] + '</button></span><br>')
-                    } else {
-                        op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
-                    }
+                        if (o[1]) {
+                            op.push(
+                                '<span><img width="100" height="100" src="' +
+                                    location.protocol +
+                                    location.hostname +
+                                    "/images" +
+                                    o[1] +
+                                    '"><br><button onclick="btcl(this, currques, currques.op.indexOf(lc))">' +
+                                    o[0] +
+                                    "</button></span><br>"
+                            );
+                        } else {
+                            op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
+                        }
                         // op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
                     });
                     qhash += 1;
@@ -120,15 +129,15 @@
             }
 
             function btcl(el, q) {
-                self.ques.push([q.id, el.innerText])
+                self.ques.push([q.id, el.innerText]);
                 // let j = Array.from(el.parentElement.children)
                 // j.forEach(r=>{
                 //     if(r.innerText == el.innerText)
                 //     self.ques.push([q.id, j.indexOf(r)])
                 // })
                 if (qhash == qc) {
-                    p2.remove()
-                    p3.innerText = ("completed\n generating your link...  ");
+                    p2.remove();
+                    p3.innerText = "completed\n generating your link...  ";
                     fetch("/s", {
                         headers: {
                             "Content-Type": "application/json",
@@ -137,7 +146,7 @@
                         body: JSON.stringify(self),
                     }).then((e) =>
                         e.text().then((r) => {
-                            p3.innerHTML = 'your quiz link <a target="_blank" href="' + r + '">'+r+'</a>';
+                            p3.innerHTML = 'your quiz link <a target="_blank" href="' + r + '">' + r + "</a>";
                         })
                     );
                 }
