@@ -17,13 +17,22 @@
         <div id="body">
             <div id="page1">
                 <div id="intro">
-                    &quot;You Know Me Better?&quot; is a fun project that allows you to send quizzes about yourself to your friends, relatives or anyone else and let yourself know, who knows you better
+                    &quot;You Know Me Better?&quot; is a fun project that allows you to send quizzes about yourself to your friends, relatives or anyone else and let yourself know, who knows you
+                    better
                 </div>
                 <form>
                     <label for="name">Enter your name to get started</label>
                     <fieldset>
                         <legend>Name</legend>
-                        <input type="text" pattern="[a-zA-Z0-9_ ]+" name="uname" oninvalid="this.setCustomValidity('only letters, numbers, spaces and underscores are allowed')" oninput="this.setCustomValidity('')" onkeydown="this.setCustomValidity('')" required />
+                        <input
+                            type="text"
+                            pattern="[a-zA-Z0-9_ ]+"
+                            name="uname"
+                            oninvalid="this.setCustomValidity('only letters, numbers, spaces and underscores are allowed')"
+                            oninput="this.setCustomValidity('')"
+                            onkeydown="this.setCustomValidity('')"
+                            required
+                        />
                     </fieldset>
                     <button type="submit">go</button>
                 </form>
@@ -54,6 +63,8 @@
                     <div id="ops"></div>
                 </div>
             </div>
+
+            <div id="page3"></div>
         </div>
 
         <script>
@@ -65,9 +76,10 @@
             let qhash = 0;
             let currques;
             let lc;
-            let qc=10;
+            let qc = 10;
             let p1 = document.getElementById("page1");
             let p2 = document.getElementById("page2");
+            let p3 = document.getElementById("page3");
             let form = document.forms[0];
 
             const self = {
@@ -83,21 +95,23 @@
                     return questions[ind];
                 }
             }
-
-
             function dispques() {
                 currques = pickques();
                 if (currques) {
                     ques.innerText = currques.q;
                     let op = [];
                     currques.op.forEach((o) => {
-                        lc=o
+                        lc = o;
+                        if(o[1]) {
+                        op.push('<span><img width="100" height="100" src="http://localhost/images/'+o[1]+'"><br><button onclick="btcl(this, currques, currques.op.indexOf(lc))">' + o[0] + '</button></span><br>')
+                    } else {
                         op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
+                    }
+                        // op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
                     });
                     qhash += 1;
-                    if (qhash >4 && qhash<=parseInt(f.value) && qc <=qhash)
-                    f.removeChild(f.children[0])
-                    
+                    if (qhash > 4 && qhash <= parseInt(f.value) && qc <= qhash) f.removeChild(f.children[0]);
+
                     qh.innerText = "Q" + qhash;
                     ops.innerHTML = op.join(" ");
                 } else {
@@ -106,24 +120,27 @@
             }
 
             function btcl(el, q) {
-                // self.ques.push([q.id, el.innerText])
-                let j = Array.from(el.parentElement.children)
-                j.forEach(r=>{
-                    if(r.innerText == el.innerText)
-                    self.ques.push([q.id, j.indexOf(r)])
-                })
+                self.ques.push([q.id, el.innerText])
+                // let j = Array.from(el.parentElement.children)
+                // j.forEach(r=>{
+                //     if(r.innerText == el.innerText)
+                //     self.ques.push([q.id, j.indexOf(r)])
+                // })
                 if (qhash == qc) {
-                    document.write('completed\n generating your link...  ')
-                    fetch('/s', {
+                    p2.remove()
+                    p3.innerText = ("completed\n generating your link...  ");
+                    fetch("/s", {
                         headers: {
-                            'Content-Type': 'application/json'
+                            "Content-Type": "application/json",
                         },
-                        method: 'post',
-                        body: JSON.stringify(self)
-                    }).then(e=> e.text().then(r=>document.write(r)))
-                    
+                        method: "post",
+                        body: JSON.stringify(self),
+                    }).then((e) =>
+                        e.text().then((r) => {
+                            p3.innerText = 'your quiz link <a target="_blank" href="' + r + '">'+r+'</a>';
+                        })
+                    );
                 }
-                console.log(el.innerText);
                 dispques();
             }
 
@@ -133,7 +150,7 @@
                 p1.remove();
                 setTimeout(() => {
                     p2.removeAttribute("hidden");
-                }, 300);
+                }, 200);
                 dispques();
             };
             skip.onclick = () => {
@@ -141,8 +158,8 @@
                 dispques();
             };
             f.oninput = () => {
-                qc=parseInt(f.value)
-            }
+                qc = parseInt(f.value);
+            };
         </script>
     </body>
 </html>
