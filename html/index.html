@@ -137,7 +137,7 @@
                         body: JSON.stringify(self),
                     }).then((e) =>
                         e.text().then((r) => {
-                            p3.innerText = 'your quiz link <a target="_blank" href="' + r + '">'+r+'</a>';
+                            p3.innerHTML = 'your quiz link <a target="_blank" href="' + r + '">'+r+'</a>';
                         })
                     );
                 }
