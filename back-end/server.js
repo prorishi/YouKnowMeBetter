@@ -1,36 +1,39 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const questions = require("./questions");
 
 let users = {};
-const questions = require("./questions");
+const usersFile = path.join(__dirname, ".users");
+const frontEnd = path.join(path.dirname(__dirname), "front-end");
 
 function getContents(file) {
     return fs.readFileSync(file, {
         encoding: "utf-8",
-        flag: "r",
     });
+}
+function template(file, object) {
+    return getContents(path.join(frontEnd, "html", file)).replace("{{}}", JSON.stringify(object));
 }
 
 function upusers() {
-    users = JSON.parse(getContents(path.join(path.dirname(__dirname), "users.json")));
+    users = JSON.parse(getContents(usersFile));
 }
 function updb() {
-    fs.writeFileSync(path.join(path.dirname(__dirname), "users.json"), JSON.stringify(users));
+    fs.writeFileSync(usersFile, JSON.stringify(users));
 }
 
 const server = express();
-
-server.use("/images", express.static(path.join(path.dirname(__dirname), "images")));
+server.use(express.static(frontEnd));
 server.use(express.json());
-// server.use("/images" ,express.static("../images"));
 
 server.get("/", (request, response) => {
     console.log("get /");
-    response.end(getContents(path.join(path.dirname(__dirname), "html", "index.html")).replace("{{}}", JSON.stringify(questions)));
+    response.end(template("create.html", questions));
 });
 
 server.post("/s", (request, response) => {
+    console.log(request.body);
     let name = request.body.name;
     let uname = name.replace(/[^a-zA-Z0-9_-]/gi, "");
     upusers();
@@ -40,7 +43,7 @@ server.post("/s", (request, response) => {
         users[uname + d] = {
             name: name,
             uname: uname + d,
-            ques: request.body.ques,
+            ques: request.body.questions,
             friends: [],
             counter: 0,
         };
@@ -49,14 +52,13 @@ server.post("/s", (request, response) => {
         users[uname] = {
             name: name,
             uname: uname,
-            ques: request.body.ques,
+            ques: request.body.questions,
             friends: [],
             counter: 0,
         };
         response.end(request.protocol + "://" + request.hostname + "/" + uname);
     }
     updb();
-    console.log(request.body);
 });
 
 server.get("/:person", (request, response) => {
@@ -75,7 +77,7 @@ server.get("/:person", (request, response) => {
                 co: q[1],
             });
         });
-        response.end(getContents(path.join(path.dirname(__dirname), "html", "quiz.html")).replace("{{}}", JSON.stringify(data)));
+        response.end(getContents(path.join(frontEnd, "html", "attempt.html")).replace("{{}}", JSON.stringify(data)));
     } else {
         response.end("not found");
     }
@@ -86,7 +88,6 @@ server.post("/sub", (request, response) => {
     let n = request.body;
     let whose = n.whose;
     console.log(n.score, users[whose].friends);
-    // console.log(n.whose, users[n].friends);
     users[whose].friends.push([n.name, n.score]);
     updb();
     response.end("ok");

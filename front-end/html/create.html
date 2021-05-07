@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="/" type="image/x-icon" />
+        <link rel="stylesheet" href="/css/main.css" />
+        <title>You Know Me Better?</title>
+    </head>
+    <body>
+        <div id="header">
+            <div id="title">You Know Me Better?</div>
+            <div id="menu">
+                <div id="menu-button"></div>
+                <div id="menu-contents">
+                    <div>About the author</div>
+                </div>
+            </div>
+        </div>
+        <div id="body">
+            <div id="page-1">
+                <div id="intro">Create quizzes about yourself and send them to your friends, relatives or anyone else and see, who knows you better!!</div>
+                <form>
+                    <label for="user-name">Enter your name to get started</label>
+                    <fieldset>
+                        <legend>Name</legend>
+                        <input type="text" name="user-name" autofocus required />
+                    </fieldset>
+                    <button type="submit">Start</button>
+                </form>
+            </div>
+
+            <div id="page-2" hidden>
+                <div id="sub-heading">Create your Quiz</div>
+                <form>
+                    <label for="number-of-questions">Number of Questions:</label>
+                    <select id="number-of-questions">
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option selected>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                    </select>
+                </form>
+                <div id="question-area">
+                    <button id="skip">skip this question</button>
+                    <div id="question-hash">Q1</div>
+                    <div id="question"></div>
+                    <div id="options"></div>
+                </div>
+            </div>
+
+            <div id="page-3"></div>
+        </div>
+
+        <script>
+            const questions = JSON.parse(`{{}}`);
+            const numberOfQuestions = document.getElementById("number-of-questions"),
+                questionArea = document.getElementById("question"),
+                optionsArea = document.getElementById("options"),
+                questionHash = document.getElementById("question-hash"),
+                skipButton = document.getElementById("skip"),
+                page1 = document.getElementById("page-1"),
+                page2 = document.getElementById("page-2"),
+                page3 = document.getElementById("page-3"),
+                nameForm = document.forms[0];
+            let hash = 0;
+            let currentQuestion;
+            let lc;
+            let qc = 10;
+            let questionsChosen = [];
+
+            const self = {
+                questions: [],
+            };
+
+            function chooseQuestion() {
+                let qIndex = Math.floor(Math.random() * Object.keys(questions).length);
+                if (!questionsChosen.includes(qIndex)) {
+                    questionsChosen.push(qIndex);
+                    return questions[qIndex];
+                }
+            }
+            function displayQuestion() {
+                currentQuestion = chooseQuestion();
+                if (currentQuestion) {
+                    questionArea.innerText = currentQuestion.q;
+                    let options = [];
+                    optionsArea.innerHTML=''
+                    currentQuestion.op.forEach((optionData) => {
+                        lc = optionData;
+                        if (optionData[1]) {
+                            let option = document.createElement("button");
+                            let optionImage = document.createElement("img");
+                            let optionText = document.createElement("div");
+                            let imageSource = document.createAttribute("src");
+                            optionImage.setAttributeNode(imageSource);
+                            option.appendChild(optionImage);
+                            option.appendChild(optionText);
+                            optionsArea.appendChild(option);
+                            optionText.appendChild(document.createTextNode(optionData[0]));
+                            imageSource.value = location.origin + "/images/" + optionData[1];
+                            option.onclick = ()=>{
+                                btcl(this, currentQuestion, currentQuestion.op.indexOf(lc))
+                            } 
+                            // options.push(
+                            //     '<span><img width="100" height="100" src="' +
+                            //         location.protocol +
+                            //         "//" +
+                            //         location.hostname +
+                            //         "/images/" +
+                            //         o[1] +
+                            //         '"><br><button onclick="btcl(this, currques, currques.op.indexOf(lc))">' +
+                            //         o[0] +
+                            //         "</button></span><br>"
+                            // );
+                        } else {
+                            optionsArea.innerHTML += ("<button onclick='btcl(this, currentQuestion, currentQuestion.op.indexOf(lc))'>" + optionData[0] + "</button> ");
+                        }
+                        // op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
+                    });
+                    hash += 1;
+                    if (hash > 4 && hash <= parseInt(numberOfQuestions.value) && qc <= hash) numberOfQuestions.removeChild(numberOfQuestions.children[0]);
+                    questionHash.textContent = "Q" + hash;
+                    // ops.innerHTML = op.join(" ");
+                } else {
+                    displayQuestion();
+                }
+            }
+
+            function btcl(el, q) {
+                self.questions.push([q.id, el.innerText]);
+                // let j = Array.from(el.parentElement.children)
+                // j.forEach(r=>{
+                //     if(r.innerText == el.innerText)
+                //     self.ques.push([q.id, j.indexOf(r)])
+                // })
+                if (hash == qc) {
+                    page2.remove();
+                    page3.innerText = "completed\n generating your link...  ";
+                    fetch("/s", {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        method: "post",
+                        body: JSON.stringify(self),
+                    }).then((e) =>
+                        e.text().then((r) => {
+                            page3.innerHTML = 'your quiz link <a target="_blank" href="' + r + '">' + r + "</a>";
+                        })
+                    );
+                }
+                displayQuestion();
+            }
+
+            nameForm.onsubmit = (e) => {
+                e.preventDefault();
+                self.name = document.getElementsByName('user-name')[0].value;
+                page1.remove();
+                setTimeout(() => {
+                    page2.removeAttribute("hidden");
+                }, 200);
+                displayQuestion();
+            };
+            skipButton.onclick = () => {
+                hash -= 1;
+                displayQuestion();
+            };
+            numberOfQuestions.oninput = () => {
+                qc = parseInt(numberOfQuestions.value);
+            };
+        </script>
+    </body>
+</html>

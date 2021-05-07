@@ -1,10 +1,10 @@
 {
   "name": "youknowmebetter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Test who knows you better.",
-  "main": "js/server.js",
+  "main": "back-end/server.js",
   "scripts": {
-    "start": "node js/server"
+    "start": "node back-end/server.js"
   },
   "repository": {
     "type": "git",
@@ -12,12 +12,8 @@
   },
   "author": "Rishi Vishwakarma",
   "license": "Unlicense",
-  "bugs": {
-    "url": "https://github.com/prorishi/YouKnowMeBetter/issues"
-  },
   "homepage": "https://github.com/prorishi/YouKnowMeBetter#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "fastify": "^3.15.1"
+    "express": "^4.17.1"
   }
 }
