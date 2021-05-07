@@ -100,13 +100,13 @@
                             let option = document.createElement("button");
                             let optionImage = document.createElement("img");
                             let optionText = document.createElement("div");
-                            let imageSource = document.createAttribute("src");
-                            optionImage.setAttributeNode(imageSource);
                             option.appendChild(optionImage);
                             option.appendChild(optionText);
                             optionsArea.appendChild(option);
                             optionText.appendChild(document.createTextNode(optionData[0]));
-                            imageSource.value = location.origin + "/images/" + optionData[1];
+                            optionImage.setAttribute('src', location.origin + "/images/" + optionData[1]);
+                            optionImage.setAttribute("width", 150)
+                            optionImage.setAttribute("height", 150)
                             option.onclick = ()=>{
                                 btcl(this, currentQuestion, currentQuestion.op.indexOf(lc))
                             } 

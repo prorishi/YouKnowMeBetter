@@ -72,12 +72,12 @@ server.get("/:person", (request, response) => {
         data.ques = [];
         users[person].ques.forEach((q) => {
             data.ques.push({
-                q: questions[q[0]].qo.replace(/{}/g, data.name),
+                q: questions[q[0]].q.replace('Have', 'Has').replace('do', 'does').replace('Do', 'Does').replace(/your/ig, data.name+"'s").replace(/you/ig, data.name),
                 ops: questions[q[0]].op,
                 co: q[1],
             });
         });
-        response.end(getContents(path.join(frontEnd, "html", "attempt.html")).replace("{{}}", JSON.stringify(data)));
+        response.end(template('attempt.html', data));
     } else {
         response.end("not found");
     }
