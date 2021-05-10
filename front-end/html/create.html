@@ -14,7 +14,7 @@
             <div id="menu">
                 <div id="menu-button"></div>
                 <div id="menu-contents">
-                    <div>About the author</div>
+                    <div>About the Author</div>
                 </div>
             </div>
         </div>
@@ -82,14 +82,14 @@
             };
 
             function chooseQuestion() {
-                let qIndex = Math.floor(Math.random() * Object.keys(questions).length);
+                let qIndex = Math.floor(Math.random() * questions.length);
                 if (!questionsChosen.includes(qIndex)) {
                     questionsChosen.push(qIndex);
                     return questions[qIndex];
                 }
             }
             function displayQuestion() {
-                currentQuestion = chooseQuestion();
+                 currentQuestion = chooseQuestion();
                 if (currentQuestion) {
                     questionArea.innerText = currentQuestion.q;
                     let options = [];
@@ -103,26 +103,15 @@
                             option.appendChild(optionImage);
                             option.appendChild(optionText);
                             optionsArea.appendChild(option);
-                            optionText.appendChild(document.createTextNode(optionData[0]));
-                            optionImage.setAttribute('src', location.origin + "/images/" + optionData[1]);
+                            optionText.appendChild(document.createTextNode(optionData));
+                            optionImage.setAttribute('src', location.origin + "/images/" + optionData.toLowerCase().replace(/ /g, '-') + '.jpg');
                             optionImage.setAttribute("width", 150)
-                            optionImage.setAttribute("height", 150)
-                            option.onclick = ()=>{
-                                btcl(this, currentQuestion, currentQuestion.op.indexOf(lc))
+                            // optionImage.setAttribute("height", 150)
+                            option.onclick = () => {
+                                btcl(option, currentQuestion, currentQuestion.op.indexOf(lc))
                             } 
-                            // options.push(
-                            //     '<span><img width="100" height="100" src="' +
-                            //         location.protocol +
-                            //         "//" +
-                            //         location.hostname +
-                            //         "/images/" +
-                            //         o[1] +
-                            //         '"><br><button onclick="btcl(this, currques, currques.op.indexOf(lc))">' +
-                            //         o[0] +
-                            //         "</button></span><br>"
-                            // );
                         } else {
-                            optionsArea.innerHTML += ("<button onclick='btcl(this, currentQuestion, currentQuestion.op.indexOf(lc))'>" + optionData[0] + "</button> ");
+                            // optionsArea.innerHTML += ("<button onclick='btcl(this, currentQuestion, currentQuestion.op.indexOf(lc))'>" + optionData + "</button> ");
                         }
                         // op.push("<button onclick='btcl(this, currques, currques.op.indexOf(lc))'>" + o[0] + "</button> ");
                     });
@@ -136,7 +125,8 @@
             }
 
             function btcl(el, q) {
-                self.questions.push([q.id, el.innerText]);
+                console.log(el, q);
+                self.questions.push([q.n, el.innerText]);
                 // let j = Array.from(el.parentElement.children)
                 // j.forEach(r=>{
                 //     if(r.innerText == el.innerText)

@@ -1,225 +1,157 @@
-module.exports = {
-    1: {
-        id: 1,
+module.exports = [
+    {
+        n: 1,
         q: "What beverage do you prefer the most?",
-        qq: "What beverage does {} prefer the most?",
-        op: [
-            ["Tea", "tea.png"],
-            ["Coffee", "coffee.jpg"],
-            ["Water", "water.jpg"],
-            ["Milk", "milk.jpg"],
-            ["Cold-drinks", "cold-drink.jpg"],
-            ["Juice", "juice.jpg"],
-        ],
+        op: ["Tea", "Coffee", "Water", "Milk", "Cold-drinks", "Juice"],
     },
-    2: {
-        id: 2,
+    {
+        n: 2,
         q: "What is your Birthday month?",
-        qq: "What is {}'s Birthday month?",
-        op: [
-            ["January", null],
-            ["February", null],
-            ["March", null],
-            ["April", null],
-            ["May", null],
-            ["June", null],
-            ["July", null],
-            ["August", null],
-            ["September", null],
-            ["October", null],
-            ["November", null],
-            ["December", null],
-        ],
+        op: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     },
-    3: {
-        id: 3,
+    {
+        n: 3,
         q: "What is your favorite color?",
-        qq: "What is {}'s favorite color?",
-        op: [
-            ["black", null],
-            ["yellow", null],
-            ["red", null],
-            ["blue", null],
-            ["green", null],
-            ["orange", null],
-            ["white", null],
-            ["pink", null],
-            ["violet", null],
-            ["Something else", null],
-        ],
+        op: ["Black", "Yellow", "Red", "Blue", "Green", "Orange", "White", "Pink", "Purple", "Something else"],
     },
-    4: {
-        id: 4,
+    {
+        n: 4,
         q: "Do you like Android or iPhone?",
-        qq: "Does {} like Android or iPhone?",
-        op: [
-            ["Android", "android.jpg"],
-            ["iPhone", "iphone.jpg"],
-        ],
+        op: ["Android", "iPhone"],
     },
-    5: {
-        id: 5,
+    {
+        n: 5,
         q: "Who, according to you, is better?",
-        qq: "Who, according to {}, is better?",
-        op: [
-            ["Ronaldo", "ronaldo.jpg"],
-            ["Messi", "messi.jpg"],
-        ],
+        op: ["Ronaldo", "Messi"],
     },
-    6: {
-        id: 6,
-        q: "Do you like rain or snow?",
-        qq: "Does {} like rain or snow?",
-        op: [["Rain"], ["snow"]],
+    {
+        n: 6,
+        q: "Do you like, rain or snow?",
+        op: ["Rain", "Snow"],
     },
-    7: {
-        id: 7,
+    {
+        n: 7,
         q: "Which platform do you use the most?",
-        qq: "Which platform does {} use the most?",
-        op: [["WhatsApp"], ["Facebook"], ["Instagram"], ["YouTube"]],
+        op: ["WhatsApp", "Facebook", "Instagram", "YouTube"],
     },
-    8: {
-        id: 8,
+    {
+        n: 8,
         q: "What type of games do you like?",
-        qq: "What type of games does {} like?",
-        op: [["Indoor games"], ["Outdoor games"], ["Mobile games"], ["Don't play any games."]],
+        op: ["Indoor games", "Outdoor games", "Video games", "Do not play games"],
     },
-    9: {
-        id: 9,
+    {
+        n: 9,
         q: "Do you like veg or non-veg?",
-        qq: "Does {} like veg or non-veg?",
-        op: [["veg"], ["non-veg"]],
+        op: ["Veg", "Non-veg"],
     },
-    10: {
-        id: 10,
+    {
+        n: 10,
         q: "Which time of the day do you like?",
-        qq: "Which time of the day does {} like?",
-        op: [["Morning"], ["Afternoon"], ["Evening"], ["Night"]],
+        op: ["Morning", "Afternoon", "Evening", "Night"],
     },
-    11: {
-        id: 11,
+    {
+        n: 11,
         q: "What type of food do you like?",
-        qq: "What type of food does {} like?",
-        op: [["Sweet"], ["Spicy"]],
+        op: ["Sweet", "Spicy"],
     },
-    12: {
-        id: 12,
+    {
+        n: 12,
         q: "Which one will you choose?",
-        qq: "Which one will {} choose?",
-        op: [["beach"], ["hills"]],
+        op: ["Beach", "Hills"],
     },
-    13: {
-        id: 13,
+    {
+        n: 13,
         q: "What kind of hair do you like?",
-        qq: "What kind of hair does {} like?",
-        op: [["Short"], ["Long"]],
+        op: ["Short", "Long"],
     },
-    14: {
-        id: 14,
+    {
+        n: 14,
         q: "What is your Favourite Ice-Cream?",
-        qq: "What is {}'s Favourite Ice-Cream?",
-        op: [["Chocolate"], ["Vanilla"], ["Mango"], ["StrawBerry"], ["Butter-Scotch"], ["Pineapple"]],
+        op: ["Chocolate", "Vanilla", "Mango", "Strawberry", "Butter scotch", "Pista"],
     },
-    15: {
-        id: 15,
+    {
+        n: 15,
         q: "What’s your pick?",
-        qq: "What’s {}'s pick?",
-        op: [["Pen"], ["Pencil"], ["Chalk"], ["Typing"]],
+        op: ["Pen", "Pencil", "Chalk", "Typing"],
     },
-    16: {
-        id: 16,
+    {
+        n: 16,
         q: "On winning a lottery, What will you do?",
-        qq: "If {} wins a lottery, What will {} do?",
-        op: [["buy diamonds"], ["invest the money"], ["Go on a world tour"], ["Invest in education"]],
+        op: ["Buy Diamonds", "Go shopping", "Invest the money", "Go on a world tour", "Invest in education"],
     },
-    17: {
-        id: 17,
+    {
+        n: 17,
         q: "Which type of shopping do you like?",
-        qq: "Which type of shopping does {} like?",
-        op: [["online"], ["traditional"]],
+        op: ["Online Shopping", "Traditional"],
     },
-    18: {
-        id: 18,
+    {
+        n: 18,
         q: "Which weather do you prefer?",
-        qq: "Which weather does {} prefer?",
-        op: [["Warm"], ["Cool"], ["Rainy"], ["Windy"]],
+        op: ["Warm", "Cool", "Rainy", "Windy"],
     },
-    19: {
-        id: 19,
+    {
+        n: 19,
         q: "How do you travel in day to day life?",
-        qq: "How does {} travel in day to day life?",
-        op: [["Bicycle"], ["Car"], ["Motor-Bike"], ["Scooter"], ["Bus"], ["Taxi"], ["Train"], ["Walking"]],
+        op: ["Bicycle", "Car", "Motor Bike", "Scooter", "Bus", "Taxi", "Train", "Walking"],
     },
-    20: {
-        id: 20,
+    {
+        n: 20,
         q: "What do you prefer?",
-        qq: "What does {} prefer?",
-        op: [["Online class"], ["Offine class"]],
+        op: ["Online classes", "Offline classes"],
     },
-    21: {
-        id: 21,
+    {
+        n: 21,
         q: "What is a good school according to you?",
-        qq: "What is a good school according to {}?",
-        op: [["Where there is no study"], ["Where teachers are the best"], ["Where there is a large playground"]],
+        op: ["Where there is no study", "Where teachers are the best", "Where there is a large playground"],
     },
-    22: {
-        id: 22,
-        q: "What thing you like the most in school?",
-        qq: "Which does {} like the most in school?",
-        op: [["Learning"], ["Sleeping at back bench"], ["Game period"], ["teachers"], ["talking woth friends"]],
-    },
-    23: {
-        id: 23,
+    // {
+    //     n: 22,
+    //     q: "What thing you like the most in school?",
+    //     op: ["Learning", "Sleeping at back bench", "Game period", "Teachers", "Talking with friends"],
+    // },
+    {
+        n: 23,
         q: "Have you ever eaten food during lectures?",
-        qq: "Has {} ever eaten food during lectures?",
-        op: [["yes"], ["no"]],
+        op: ["Yes", "No"],
     },
-    24: {
-        id: 24,
+    {
+        n: 24,
         q: "Which clothes do you prefer in school?",
-        qq: "Which type of clothes does {} prefer in school?",
-        op: [["Casual dress"], ["school uniform"]],
+        op: ["Casual dress", "School uniform"],
     },
-    25: {
-        id: 25,
+    {
+        n: 25,
         q: "Have you ever got into a fight in school?",
-        qq: "Has {} ever got into a fight in school?",
-        op: [["Yes"], ["No"]],
+        op: ["Yes", "No"],
     },
-    26: {
-        id: 26,
+    {
+        n: 26,
         q: "Have you ever cheated in exam?",
-        qq: "Has {} ever cheated in exam?",
-        op: [["Yes"], ["No"]],
+        op: ["Yes", "No"],
     },
-    27: {
-        id: 27,
-        q: "What is your favorite subject?",
-        qq: "What is {}'s favorite subject?",
-        op: [["Science"], ["Mathematics"], ["History"], ["Drawing/Painting"], ["Geography"], ["Music"], ["Language"], ["everything"], ["something else"]],
-    },
-    28: {
-        id: 28,
-        q: "What is your favorite music genre?",
-        qq: "What is {}'s favorite music genre?",
-        op: [["Rock"], ["Party"], ["Classical"], ["Rap"], ["Bollywood"], ["English songs"]],
-    },
-    29: {
-        id: 29,
-        q: "What do you wish to become in future?",
-        qq: "What does {} wish to become in future?",
-        op: [["Engineer"], ["Lawyer"], ["Doctor"], ["Hacker"], ["Artist"], ["Actor"], ["Civil Worker"], ["Teacher"], ["Sports person"], ["Business owner"], ["Scientist"], ["Something Else"]],
-    },
-    30: {
-        id: 30,
+    // {
+    //     n: 27,
+    //     q: "What is your favorite subject?",
+    //     op: ["Science", "Mathematics", "History", "Drawing-Painting", "Geography", "Music", "Computers", "Language", "Everything", "Something else"],
+    // },
+    // {
+    //     n: 28,
+    //     q: "What is your favorite music genre?",
+    //     op: ["Rock", "Party", "Classical", "Rap", "Bollywood", "English songs"],
+    // },
+    // {
+    //     n: 29,
+    //     q: "What do you wish to become in future?",
+    //     op: ["Engineer", "Lawyer", "Doctor", "Hacker", "Artist", "Actor", "Civil Worker", "Teacher", "Sports person", "Business owner", "Scientist", "Something Else"],
+    // },
+    {
+        n: 30,
         q: "What is your favorite device?",
-        qq: "What is {}'s favorite device?",
-        op: [["Laptop"],["Desktop"],["Mobile Phone"],["Tablet"],["Smart watch"]],
+        op: ["Laptop", "Desktop", "Mobile Phone", "Tablet", "Smart watch"],
     },
-    31: {
-        id: 31,
-        q: "What is your hobby?",
-        qq: "What is {}'s hobby?",
-        op: [["Reading"], ["watching TV/videos"], ["surfing the internet"], ["social media"], ["sleeping"], ["playing"], ["Time pass"]],
-    },
-};
+    // {
+    //     n: 31,
+    //     q: "What is your hobby?",
+    //     op: ["Reading", "Watching TV/videos", "Surfing internet", "Social media", "Sleeping", "Playing", "Time pass"],
+    // },
+];

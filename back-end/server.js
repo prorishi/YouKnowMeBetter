@@ -71,9 +71,11 @@ server.get("/:person", (request, response) => {
         data.uname = users[person].uname;
         data.ques = [];
         users[person].ques.forEach((q) => {
+            let qu= questions.filter((ques)=> ques.n==q[0])[0]
+            console.log(qu);
             data.ques.push({
-                q: questions[q[0]].q.replace('Have', 'Has').replace('do', 'does').replace('Do', 'Does').replace(/your/ig, data.name+"'s").replace(/you/ig, data.name),
-                ops: questions[q[0]].op,
+                q: qu.q.replace('Have', 'Has').replace('do', 'does').replace('Do', 'Does').replace(/your/ig, data.name+"'s").replace(/you/ig, data.name),
+                ops: qu.op,
                 co: q[1],
             });
         });
