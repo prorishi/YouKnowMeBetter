@@ -73,29 +73,45 @@
             function dispq() {
                 qh.innerText = "Q" + h;
                 qarea.innerText = data.ques[h - 1].q;
-                let r = [];
+                // let r = [];
+                oparea.replaceChildren()
                 data.ques[h - 1].ops.forEach((op) => {
-                    if (op) {
-                        r.push(
-                            '<span><img width="100" src="' +
-                                location.protocol + "//"+
-                                location.hostname +
-                                "/images/" +
-                                op.toLowerCase().replace(/ /g, '-') + '.jpg' +
-                                '"><br><button onclick="opclick(this, h-1)">' +
-                                op +
-                                "</button></span><br>"
-                        );
-                    } else {
-                        // r.push('<button onclick="opclick(this, h-1)">' + op + "</button>");
-                    }
-                    // r.push('<button onclick="opclick(this, h-1)">' + op[0] + "</button>");
-                });
-                oparea.innerHTML = r.join(" ");
+                    // if (op) {
+                        let option = document.createElement("button");
+            let optionImage = document.createElement("img");
+            let opLabel = document.createElement("div");
+            option.appendChild(optionImage);
+            option.appendChild(opLabel);
+            opLabel.appendChild(document.createTextNode(op));
+            optionImage.setAttribute("src", location.origin + "/images/" + op.toLowerCase().replace(/ /gi, "-") + ".jpg");
+            optionImage.setAttribute("width", 150);
+            option.onclick = () => {
+                // optionClicked(option, currentQ);
+                opclick(op, h-1)
+            };
+            oparea.appendChild(option);
+        });
+                //         r.push(
+                //             '<span><img width="100" src="' +
+                //                 location.protocol + "//"+
+                //                 location.hostname +
+                //                 "/images/" +
+                //                 op.toLowerCase().replace(/ /g, '-') + '.jpg' +
+                //                 '"><br><button onclick="opclick(this, h-1)">' +
+                //                 op +
+                //                 "</button></span><br>"
+                //         );
+                //     } else {
+                //         // r.push('<button onclick="opclick(this, h-1)">' + op + "</button>");
+                //     }
+                //     // r.push('<button onclick="opclick(this, h-1)">' + op[0] + "</button>");
+                // });
+                // oparea.innerHTML = r.join(" ");
             }
-            function opclick(el, qh) {
-                console.log("qh", qh);
-                if (el.innerText == data.ques[qh].co) {
+            function opclick(el, qn) {
+                console.log(el, (data.ques[qn]).ops[(data.ques[qn].co)]);
+
+                if (el == (data.ques[qn]).ops[(data.ques[qn].co)]) {
                     console.log("corrrect");
                     st.innerText = "correct";
                     setTimeout(() => {
