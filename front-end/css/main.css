@@ -15,7 +15,7 @@ body {
 }
 
 #header {
-    margin: 7vh 3vw;
+    padding: 7vh 3vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,8 +29,8 @@ body {
 }
 
 #menu-button {
-    height: 7vh;
-    width: 8vh;
+    height: 6vh;
+    width: 7vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,9 +40,9 @@ body {
 
 #menu-button > * {
     width: 70%;
-    height: .6vh;
+    height: .5vh;
     background: black;
-    border-radius: 2em;
+    border-radius: 4em;
 }
 
 #body {
