@@ -95,4 +95,10 @@ server.post("/sub", (request, response) => {
     response.end("ok");
 });
 
-server.listen(process.env.PORT || 80);
+server.listen(process.env.PORT || 80, (error)=>{
+    console.log(
+        error
+            ? error.message
+            : 'http://localhost'
+    );
+});

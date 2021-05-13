@@ -17,6 +17,7 @@
         </div>
         <div id="body">
             <div id="page1">
+                <img src="/images/quiz.jpg">
                 So, You think you know about <span id="name"></span> better than anyone else?
                 <br />
                 <form>
@@ -73,10 +74,8 @@
             function dispq() {
                 qh.innerText = "Q" + h;
                 qarea.innerText = data.ques[h - 1].q;
-                // let r = [];
                 oparea.replaceChildren()
                 data.ques[h - 1].ops.forEach((op) => {
-                    // if (op) {
                         let option = document.createElement("button");
             let optionImage = document.createElement("img");
             let opLabel = document.createElement("div");

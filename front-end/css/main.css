@@ -5,68 +5,46 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Lobster, cursive;
+    text-align: center;
 }
 
 body {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
+    background: linear-gradient(180deg, #b4fffb, white);
 }
 
 #header {
-    height: 8vh;
+    margin: 7vh 3vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 0.5vh solid #385cc7;
 }
 
-#title {
+#header > h1 {
+    margin-left: 3vw;
     font-size: x-large;
     font-family: "Permanent Marker", cursive;
     font-weight: 100;
 }
 
-#menu {
-    position: relative;
-}
-
 #menu-button {
-    height: 8.5vh;
+    height: 7vh;
     width: 8vh;
-    background-color: #222;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    border-bottom: 0.5vh solid #cecece;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 0.5vh solid #cecece;
 }
 
-#menu-button::before {
-    content: "";
-    display: block;
-    height: 0px;
-    width: 0px;
-    border: 2vh solid #222;
-    border-top: 2.5vh solid beige;
-}
-
-#menu-contents {
-    position: absolute;
-    right: 0;
-    width: max-content;
-    top: 8vh;
-    display: none;
-    z-index: 99;
-}
-
-#menu-contents > div {
-    font-size: 3vh;
-    padding: 1.25vh 2vw;
-    width: 100%;
-    text-align: right;
-    border-bottom: 0.2vh solid crimson;
-    border-right: 0.2vh solid crimson;
+#menu-button > * {
+    width: 70%;
+    height: .6vh;
+    background: black;
+    border-radius: 2em;
 }
 
 #body {
-    height: 90vh;
+    height: 75vh;
 }
