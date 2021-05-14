@@ -7,26 +7,29 @@
         <link rel="shortcut icon" href="/" type="image/x-icon" />
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/create.css" />
-        <title>You Know Me Better?</title>
+        <title>Who Knows Better?</title>
     </head>
     <body>
         <div id="header">
-            <h1>You Know Me Better?</h1>
-            <div id="menu-button">
+            <h1>Who Knows Better?</h1>
+            <!-- <div id="menu-button">
                 <div></div>
                 <div></div>
                 <div></div>
-            </div>
+            </div> -->
         </div>
         <div id="body">
             <div id="page-1">
-                <div id="intro">Create quizzes about yourself and send them to your friends, relatives or anyone else and see, who knows you better!!</div>
-                <form onsubmit="sub(this)">
+                <img src="/images/friends.png" width="300" height="300" />
+                <div>
+                    <div id="intro">Create quizzes about yourself and send them to your friends, <br> relatives or anyone else and see, who knows you better!!</div>
+                    <br>
                     <label for="user-name">Enter your name to get started</label>
-                    <input type="text" name="user-name" autofocus required />
-                    
-                    <button type="submit">Start</button>
-                </form>
+                    <form autocomplete="off">
+                        <input type="text" name="user-name" autofocus required />
+                        <button type="submit">Start</button>
+                    </form>
+                </div>
             </div>
 
             <div id="page-2" hidden>
