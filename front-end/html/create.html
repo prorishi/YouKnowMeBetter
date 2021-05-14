@@ -12,30 +12,28 @@
     <body>
         <div id="header">
             <h1>Who Knows Better?</h1>
-            <!-- <div id="menu-button">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div> -->
         </div>
         <div id="body">
             <div id="page-1">
                 <img src="/images/friends.png" width="300" height="300" />
                 <div>
-                    <div id="intro">Create quizzes about yourself and send them to your friends, <br> relatives or anyone else and see, who knows you better!!</div>
-                    <br>
+                    <div id="intro">
+                        Create quizzes about yourself and send them to your friends, <br />
+                        relatives or anyone else and see, who knows you better!!
+                    </div>
+                    <br />
                     <label for="user-name">Enter your name to get started</label>
                     <form autocomplete="off">
-                        <input type="text" name="user-name" autofocus required />
+                        <input type="text" pattern="[a-zA-Z0-9]*" oninvalid="this.setCustomValidity('Only Letters and Numbers!!')" oninput="this.setCustomValidity('')" name="user-name" autofocus required />
                         <button type="submit">Start</button>
                     </form>
                 </div>
             </div>
 
             <div id="page-2" hidden>
-                <div id="sub-heading">Create your Quiz</div>
+                <h2 id="sub-heading">Create your Quiz</h2>
                 <form>
-                    <label for="number-of-q">Number of Questions:</label>
+                    <label for="number-of-q">Total Questions:</label>
                     <select id="number-of-q" oninput="numOfQ = parseInt(this.value)">
                         <option>5</option>
                         <option>6</option>
@@ -51,9 +49,9 @@
                     </select>
                 </form>
                 <div id="q-area">
-                    <button id="skip">skip this question</button>
                     <div id="q-hash">Q1</div>
                     <div id="q"></div>
+                    <button id="skip">skip this question</button>
                     <div id="options"></div>
                 </div>
             </div>

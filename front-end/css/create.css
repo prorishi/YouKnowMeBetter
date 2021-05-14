@@ -4,14 +4,14 @@
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    padding: 0 4vw;
+    /* padding: 0 4vw; */
     font-size: x-large;
 }
 #intro {
     text-align: center;
 }
 #page-1 > div {
-    height: 40vh;
+    margin-left: 1vw;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -31,12 +31,12 @@
 }
 
 #page-1 form > button, #page-1 form > input {
+    margin-top: 1vh;
     font-size: large;
     background-color: #afe2ff31;
     border: .4vh dashed ;
     padding: .4vh 3vw;
     border-radius: 1em;
-    outline: none;
     font-family: 'Permanent Marker';
 }
 #page-1  form > button {
@@ -52,8 +52,61 @@
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }
+#page-2 {
+    height: 87vh;
+    padding: 1vh 2vw;
+    width: min(max-content 100%);
+}
+
+#sub-heading {
+    text-align: left;
+}
+
+#page-2 > form  {
+    text-align: left;
+}
+#page-2 > form > * {
+    font-size: x-large;
+}
+
+#page-2 > form > select {
+    background: lightblue;
+    border: .4vh dashed;
+    border-radius: .7em;
+    padding: 0 1vw;
+}
+
+#q-area {
+    height: 85%;
+}
+
+#q-hash {
+    float: left;
+    margin-right: 1vw;
+    border-bottom: .3vh dashed;
+    border-right: .3vh dashed;
+    padding: .5vh 2vw .1vh .5vw;
+    border-radius: .3em;
+}
+
+
+/* #q {
+    float: right;
+} */
+
+#q-area * {
+    font-size: x-large;
+}
+
+#skip {
+    background-color: #e8fbaa;
+    border: .4vh double;
+}
 
 #options {
+    height: 80%;
+    
+    overflow-y: scroll;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }

@@ -18,6 +18,9 @@ body {
     justify-content: space-evenly;
     align-items: center;
 }
+input, button {
+    outline: none;
+}
 
 #header {
     display: flex;
@@ -31,21 +34,3 @@ body {
     font-weight: 100;
     color: #2c2c2c;
 }
-/* 
-#menu-button {
-    height: 6vh;
-    width: 7vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    border: 0.5vh solid #cecece;
-}
-
-#menu-button > * {
-    width: 70%;
-    height: .5vh;
-    background: black;
-    border-radius: 4em;
-} */
-
