@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    /* padding: 0 4vw; */
     font-size: x-large;
 }
 #intro {
@@ -64,6 +63,8 @@
 
 #page-2 > form  {
     text-align: left;
+    border-bottom: .4vh dashed white;
+    margin-bottom: 1vh;
 }
 #page-2 > form > * {
     font-size: x-large;
@@ -74,6 +75,7 @@
     border: .4vh dashed;
     border-radius: .7em;
     padding: 0 1vw;
+    font-family: monospace;
 }
 
 #q-area {
@@ -82,31 +84,52 @@
 
 #q-hash {
     float: left;
-    margin-right: 1vw;
+    margin-right: 2vw;
     border-bottom: .3vh dashed;
     border-right: .3vh dashed;
     padding: .5vh 2vw .1vh .5vw;
     border-radius: .3em;
 }
 
-
-/* #q {
-    float: right;
-} */
-
 #q-area * {
     font-size: x-large;
 }
 
+#q {
+    text-align: left;
+}
+
 #skip {
-    background-color: #e8fbaa;
-    border: .4vh double;
+    background-color: #e8fbaac0;
+    border: .1vh double;
+    font-size: medium;
+    padding: 0 2vw;
+    border-radius: 1vh;
+    float: right;
+    margin-bottom: -4vh;
 }
 
 #options {
+    margin-top: -2vh;
     height: 80%;
-    
     overflow-y: scroll;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    gap: 1.5vh;
+}
+
+#options > button {
+    padding-top: 1vh;
+    background-color: #42424263;
+    border: .4vh dashed beige;
+    border-radius: 2vh;
+    height: min-content;
+}
+
+#options > button > div {
+    color: wheat;
+}
+#options > button > img {
+    border-radius: 2vh;
 }
