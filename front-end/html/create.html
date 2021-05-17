@@ -24,7 +24,15 @@
                     <br />
                     <label for="user-name">Enter your name to get started</label>
                     <form autocomplete="off">
-                        <input type="text" pattern="[a-zA-Z0-9]*" oninvalid="this.setCustomValidity('Only Letters and Numbers!!')" oninput="this.setCustomValidity('')" name="user-name" autofocus required />
+                        <input
+                            type="text"
+                            pattern="[a-zA-Z0-9]*"
+                            oninvalid="this.setCustomValidity('Only Letters and Numbers!!')"
+                            oninput="this.setCustomValidity('')"
+                            name="user-name"
+                            autofocus
+                            required
+                        />
                         <button type="submit">Start</button>
                     </form>
                 </div>
@@ -52,12 +60,19 @@
                     <div id="q-hash">Q1</div>
                     <div id="q"></div>
                     <button id="skip">skip this question</button>
-                    <br><br>
+                    <br /><br />
                     <div id="options"></div>
                 </div>
             </div>
 
-            <div id="page-3"></div>
+            <div id="page-3" hidden>
+                <div id="link-info">Please wait while we generate your unique link.</div>
+                <input id="link" readonly />
+                <div id="link-actions" hidden>
+                    <button id="copy">Copy Link</button>
+                    <button id="wa">Share on WhatsApp</button>
+                </div>
+            </div>
         </div>
 
         <script>

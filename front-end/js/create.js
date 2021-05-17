@@ -6,11 +6,15 @@ const qNumberSelect = document.getElementById("number-of-q"),
     page1 = document.getElementById("page-1"),
     page2 = document.getElementById("page-2"),
     page3 = document.getElementById("page-3"),
-    nameForm = document.forms[0];
+    linkInfo = document.getElementById("link-info"),
+    copyButton = document.getElementById("copy"),
+    linkHolder = document.getElementById("link");
+
+nameForm = document.forms[0];
 let hash = 0;
 let currentQ;
 let numOfQ = 12;
-let questionsChosen = skippedQ = [];
+let questionsChosen = (skippedQ = []);
 
 const self = {
     questions: [],
@@ -42,9 +46,8 @@ function displayQuestion() {
             };
             optionsArea.appendChild(option);
         });
-        
+
         hash += 1;
-        // console.log(hash, qc);
         qHash.textContent = "Q" + hash;
     } else {
         displayQuestion();
@@ -52,13 +55,12 @@ function displayQuestion() {
 }
 
 function optionClicked(el, q) {
-    if(hash > 4) {
+    if (hash > 4) {
         qNumberSelect.firstElementChild.remove();
     }
     self.questions.push([q.n, q.op.indexOf(el.innerText)]);
     if (hash >= numOfQ) {
         page2.remove();
-        page3.innerText = "completed\n generating your link...  ";
         fetch("/s", {
             headers: {
                 "Content-Type": "application/json",
@@ -67,7 +69,10 @@ function optionClicked(el, q) {
             body: JSON.stringify(self),
         }).then((response) =>
             response.text().then((url) => {
-                page3.innerHTML = 'your quiz link <a target="_blank" href="' + url + '">' + url + "</a>";
+                page3.removeAttribute("hidden");
+                document.getElementById("link-actions").removeAttribute("hidden");
+                linkInfo.textContent = "Here is your Quiz Link; Send to all your friends!!";
+                linkHolder.value = url;
             })
         );
     }
@@ -85,7 +90,14 @@ nameForm.onsubmit = (submitEvent) => {
 };
 
 skipButton.onclick = () => {
-    questionsChosen.pop()
+    questionsChosen.pop();
     hash -= 1;
     displayQuestion();
+};
+
+copyButton.onclick = () => {
+    let linkLabel = document.getElementById("link");
+    linkLabel.select();
+    linkLabel.setSelectionRange(0, 999);
+    document.execCommand("copy");
 };
