@@ -8,9 +8,9 @@ const qNumberSelect = document.getElementById("number-of-q"),
     page3 = document.getElementById("page-3"),
     linkInfo = document.getElementById("link-info"),
     copyButton = document.getElementById("copy"),
-    linkHolder = document.getElementById("link");
-
-nameForm = document.forms[0];
+    linkHolder = document.getElementById("link"),
+    waButton = document.getElementById("wa"),
+    nameForm = document.forms[0];
 let hash = 0;
 let currentQ;
 let numOfQ = 12;
@@ -73,6 +73,12 @@ function optionClicked(el, q) {
                 document.getElementById("link-actions").removeAttribute("hidden");
                 linkInfo.textContent = "Here is your Quiz Link; Send to all your friends!!";
                 linkHolder.value = url;
+                linkHolder.onclick = waButton.onclick = () => {
+                    open(
+                        "whatsapp://send?text=So%20you%20think%20you%20know%20about%20" + self.name + "%20better%20than%20anyone%20else?%0AAttempt%20the%20quiz%20to%20prove%20it!!%0A" + url,
+                        "_blank"
+                    );
+                };
             })
         );
     }

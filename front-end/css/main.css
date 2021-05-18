@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Satisfy, cursive;
+    font-size: x-large;
     text-align: center;
 }
 
@@ -32,16 +33,12 @@ button {
 
 #header > h1 {
     font-family: "Permanent Marker", cursive;
+    font-size: xx-large;
     font-weight: 100;
     color: #2c2c2c;
 }
 
 ::-webkit-scrollbar {
-    width: .7vw;
-    background-color: #5d5d5d;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #dcdcdc;
-    outline: none;
-    border-radius: 1em;
+    display: none;
+    /* width: 0; */
 }

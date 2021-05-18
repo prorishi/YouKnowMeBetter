@@ -79,7 +79,7 @@
 }
 
 #q-area {
-    height: 85%;
+    height: 82%;
 }
 
 #q-hash {
@@ -106,11 +106,10 @@
     padding: 0 2vw;
     border-radius: 1vh;
     float: right;
-    margin-bottom: -4vh;
+    margin-bottom:1.5vh;
 }
 
 #options {
-    margin-top: -2vh;
     height: 80%;
     overflow-y: scroll;
     display: grid;
@@ -138,4 +137,29 @@
 
 #page-3 {
     height: 70vh;
+}
+
+
+#link {
+    background-color: #00000064;
+    color: whitesmoke;
+    border-width: 0;
+    padding: 1.5vh 4vw;
+    font-family: monospace;
+    border-bottom: .6vh solid beige;
+    border-radius: 4vh;
+    margin: 4vh 0;
+}
+
+#link::selection {
+    background-color: transparent;
+}
+
+#link-actions > * {
+    cursor: pointer;
+    background-color: #d6d6d635;
+    border: .4vh dashed beige;
+    border-radius: 3vh;
+    padding: 1vh 3vw;
+    margin: auto;
 }
