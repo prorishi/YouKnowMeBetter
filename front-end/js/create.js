@@ -1,3 +1,5 @@
+const typing = new Audio("/sounds/typing.mp3");
+
 const qNumberSelect = document.getElementById("number-of-q"),
     qArea = document.getElementById("q"),
     optionsArea = document.getElementById("options"),
@@ -10,6 +12,7 @@ const qNumberSelect = document.getElementById("number-of-q"),
     copyButton = document.getElementById("copy"),
     linkHolder = document.getElementById("link"),
     waButton = document.getElementById("wa"),
+    nameField = document.getElementById("user-name"),
     nameForm = document.forms[0];
 let hash = 0;
 let currentQ;
@@ -73,7 +76,7 @@ function optionClicked(el, q) {
                 document.getElementById("link-actions").removeAttribute("hidden");
                 linkInfo.textContent = "Here is your Quiz Link; Send to all your friends!!";
                 linkHolder.value = url;
-                linkHolder.onclick = waButton.onclick = () => {
+                waButton.onclick = () => {
                     open(
                         "whatsapp://send?text=So%20you%20think%20you%20know%20about%20" + self.name + "%20better%20than%20anyone%20else?%0AAttempt%20the%20quiz%20to%20prove%20it!!%0A" + url,
                         "_blank"
@@ -85,9 +88,18 @@ function optionClicked(el, q) {
     displayQuestion();
 }
 
+nameField.oninput = () => {
+    typing.play();
+    console.log("s");
+    setTimeout(() => {
+        typing.pause();
+        console.log("p");
+    }, 400);
+};
+
 nameForm.onsubmit = (submitEvent) => {
     submitEvent.preventDefault();
-    self.name = document.getElementsByName("user-name")[0].value;
+    self.name = nameField.value;
     page1.remove();
     setTimeout(() => {
         page2.removeAttribute("hidden");
@@ -101,7 +113,7 @@ skipButton.onclick = () => {
     displayQuestion();
 };
 
-copyButton.onclick = () => {
+linkHolder.onclick = copyButton.onclick = () => {
     let linkLabel = document.getElementById("link");
     linkLabel.select();
     linkLabel.setSelectionRange(0, 999);

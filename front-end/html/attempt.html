@@ -5,11 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/" type="image/x-icon" />
-        <link rel="stylesheet" href="/css/main.css">
         <title>Quiz - You Know Me Better?</title>
-        <script>
-            const data = JSON.parse(`{{}}`);
-        </script>
+        <script src="/js/https.js"></script>
+        <link rel="stylesheet" href="/css/main.css" />
     </head>
     <body>
         <div id="header">
@@ -17,7 +15,7 @@
         </div>
         <div id="body">
             <div id="page1">
-                <img src="/images/quiz.jpg">
+                <img src="/images/quiz.jpg" />
                 So, You think you know about <span id="name"></span> better than anyone else?
                 <br />
                 <form>
@@ -54,7 +52,10 @@
 
             <div id="page3"></div>
         </div>
-
+        
+        <script>
+            const data = JSON.parse(`{{}}`);
+        </script>
         <script>
             let fname;
             const nform = document.forms[0];
@@ -74,22 +75,22 @@
             function dispq() {
                 qh.innerText = "Q" + h;
                 qarea.innerText = data.ques[h - 1].q;
-                oparea.replaceChildren()
+                oparea.replaceChildren();
                 data.ques[h - 1].ops.forEach((op) => {
-                        let option = document.createElement("button");
-            let optionImage = document.createElement("img");
-            let opLabel = document.createElement("div");
-            option.appendChild(optionImage);
-            option.appendChild(opLabel);
-            opLabel.appendChild(document.createTextNode(op));
-            optionImage.setAttribute("src", location.origin + "/images/" + op.toLowerCase().replace(/ /gi, "-") + ".jpg");
-            optionImage.setAttribute("width", 150);
-            option.onclick = () => {
-                // optionClicked(option, currentQ);
-                opclick(op, h-1)
-            };
-            oparea.appendChild(option);
-        });
+                    let option = document.createElement("button");
+                    let optionImage = document.createElement("img");
+                    let opLabel = document.createElement("div");
+                    option.appendChild(optionImage);
+                    option.appendChild(opLabel);
+                    opLabel.appendChild(document.createTextNode(op));
+                    optionImage.setAttribute("src", location.origin + "/images/" + op.toLowerCase().replace(/ /gi, "-") + ".jpg");
+                    optionImage.setAttribute("width", 150);
+                    option.onclick = () => {
+                        // optionClicked(option, currentQ);
+                        opclick(op, h - 1);
+                    };
+                    oparea.appendChild(option);
+                });
                 //         r.push(
                 //             '<span><img width="100" src="' +
                 //                 location.protocol + "//"+
@@ -108,14 +109,14 @@
                 // oparea.innerHTML = r.join(" ");
             }
             function opclick(el, qn) {
-                console.log(el, (data.ques[qn]).ops[(data.ques[qn].co)]);
+                console.log(el, data.ques[qn].ops[data.ques[qn].co]);
 
-                if (el == (data.ques[qn]).ops[(data.ques[qn].co)]) {
+                if (el == data.ques[qn].ops[data.ques[qn].co]) {
                     console.log("corrrect");
                     st.innerText = "correct";
                     setTimeout(() => {
                         st.innerText = "";
-                        dispq()
+                        dispq();
                     }, 800);
                     score += 1;
                 } else {
@@ -123,7 +124,7 @@
                     st.innerText = "wrong";
                     setTimeout(() => {
                         st.innerText = "";
-                        dispq()
+                        dispq();
                     }, 800);
                 }
                 if (h >= maxq) {

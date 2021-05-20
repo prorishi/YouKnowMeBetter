@@ -5,9 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/" type="image/x-icon" />
+        <title>Who Knows Better?</title>
+        <script src="/js/https.js"></script>
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/create.css" />
-        <title>Who Knows Better?</title>
     </head>
     <body>
         <div id="header">
@@ -29,7 +30,7 @@
                             pattern="[a-zA-Z0-9]*"
                             oninvalid="this.setCustomValidity('Only Letters and Numbers!!')"
                             oninput="this.setCustomValidity('')"
-                            name="user-name"
+                            id="user-name"
                             autofocus
                             required
                         />
@@ -54,13 +55,16 @@
                         <option>13</option>
                         <option>14</option>
                         <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
                     </select>
                 </form>
                 <div id="q-area">
                     <div id="q-hash">Q1</div>
                     <div id="q"></div>
-                    <button id="skip">skip this question</button>
-                    <br />
+                    <button id="skip">Skip Question</button>
+                    <!-- <div>&nbsp;</div> -->
                     <div id="options"></div>
                 </div>
             </div>
